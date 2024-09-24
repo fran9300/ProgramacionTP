@@ -1,5 +1,5 @@
 from numeration import getNumberFromSecuence
-from entities.utils import getById
+from entities.utils import getById, clear
 
 users= [
     [1,"fpelli","Franco","Pelli","contraseña",2,"20020325","fpelli@uade.edu.ar",100000],
@@ -31,6 +31,7 @@ def addUser():
     newUser.append(input("Ingrese correo electronico: "))
     newUser.append(int(input("Ingrese saldo: ")))    
     users.append(newUser)
+    clear()
     print("\nNuevo usuario agregado\n")
 
 
@@ -49,14 +50,16 @@ def checkUserAndPass(user,password):
     filtered = list(filter(lambda value : value[1]==user,getUsers()))
 
     if len(filtered) == 0:
-        print("Usuario no encontrado, intente nuevamente: ")
+        clear()
+        print("\nUsuario o contraseña incorrecta, intente nuevamente\n")
         return None 
 
     user = filtered[0]
     if(user[4] == password):
         return user
     else:
-        print("Usuario o contraseña incorrecta")
+        clear()
+        print("\nUsuario o contraseña incorrecta, intente nuevamente\n")
 
 
 
@@ -74,7 +77,10 @@ def editUser(users):
         print("Usuario no encontrado.")
     else:
         bandera=True
-        while bandera: 
+        while bandera:
+            clear()
+            print("usuario a editar: ", user)
+            print() 
             print("Seleccione el campo que desea editar:")
             print("1. Nombre de usuario")
             print("2. Nombre")
@@ -84,38 +90,32 @@ def editUser(users):
             print("6. Correo electrónico")
             print("7. Saldo")
             print ("8. Finalizar la edición")
-
+            print()
             choice = int(input())
 
             if choice == 1:
-                print("Ingrese el nuevo nombre de usuario:")
-                user[1] = input()
+                user[1] = input("Ingrese el nuevo nombre de usuario:")
             elif choice == 2:
-                print("Ingrese el nuevo nombre:")
-                user[2] = input()
+                user[2] = input("Ingrese el nuevo nombre:")
             elif choice == 3:
-                print("Ingrese el nuevo apellido:")
-                user[3] = input()
+                user[3] = input("Ingrese el nuevo apellido:")
             elif choice == 4:
-                print("Ingrese la nueva contraseña:")
-                user[4] = input()
+                user[4] = input("Ingrese la nueva contraseña:")
             elif choice == 5:
-                print("Ingrese la nueva fecha de nacimiento (formato YYYYMMDD):")
-                user[6] = input()
+                user[6] = input("Ingrese la nueva fecha de nacimiento (formato YYYYMMDD):")
             elif choice == 6:
-                print("Ingrese el nuevo correo electrónico:")
-                user[7] = input()
+                user[7] = input("Ingrese el nuevo correo electrónico:")
             elif choice == 7:
-                print("Ingrese el nuevo saldo:")
-                user[8] = int(input())
+                user[8] = int(input("Ingrese el nuevo saldo:"))
             elif choice==8:
                 bandera=False
-                print ("Ha finalizado la edición")
+                clear()
+                print ("\nHa finalizado la edición")
             else:
                 print("Opción no válida.")
                 return
 
-    print("Datos del usuario actualizados:", user)
+    print("\nDatos del usuario actualizados:", user, "\n")
 
 
 def deleteUser(usuarioId, usuarios):

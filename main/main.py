@@ -1,13 +1,11 @@
 
-from entities.movies import getMovies,addMovie,imprimirPeliculas,deleteMovie, movies
+from entities.movies import getMovies,addMovie,imprimirPeliculas,deleteMovie,editMovie, movies
 from numeration import getSecuences, getNumberFromSecuence 
 from entities.user import getUsers,addUser,checkUserAndPass,editUser, deleteUser,imprimirUsuarios, users
+from entities.utils import clear
 import os
 import re
 
-
-
-clear = lambda: os.system('cls')
 
 #Arrays y variables con datos hardcodeados ----------------------------------------------------------------------------------------
 
@@ -94,6 +92,11 @@ def consultarPeliculas():
     clear()
     imprimirPeliculas(movies)
 
+def editarPeliculas():
+    clear()
+    imprimirPeliculas(movies)
+    editMovie()
+
 def eliminarPelicula():
     #Funcion para eliminar una película del sistema. Muestra las películas disponibles y permite que el usuario seleccione una para eliminar
     clear()
@@ -157,6 +160,7 @@ def liberarSala():
 def cargarSala():
     #Función para cargar una nueva sala en el sistema con su matriz de asientos y horarios
     # TODO: sala: cantidad de filas, cantidad de columnas, horario, pelicula
+    clear()
     matrizSala = crearMatrizSala()
     horariosSala = cargarHorarios()
 
@@ -171,17 +175,20 @@ def imprimirSala():
 
 def crearSala():
     global salas
+    clear()
     newSala = []
     newSala.append(getNumberFromSecuence("salaNumeration"))
     newSala.append(input("Ingrese nombre de sala: "))
     newSala.append(int(input("Ingrese la cantidad de filas: ")))
-    newSala.append(input("Ingrese la cantidad de columnas: "))    
+    newSala.append(input("Ingrese la cantidad de columnas: "))
+    print()
     print(newSala)
     salas.append(newSala)
-    print("Nueva sala agregada\t")
+    print("\nNueva sala agregada\n")
 
 def consultarSalas():
         global salas
+        clear()
         print("ID | Nombre | Filas | Columnas ")
         for sala in salas:
             print(f"{sala[0]} | {sala[1]} | {sala[2]} | {sala[3]} ")
@@ -193,9 +200,12 @@ def consultarSalas():
 
 def Registro():
     #Funcion para registrar a un nuevo usuario en el sistema
+    clear()
     addUser()
 
 def edicionDeUsuario():
+    clear()
+    imprimirUsuarios(users)
     editUser(users)
 
 def eliminarUsuario():
@@ -218,8 +228,10 @@ def configDescuentoPorTipoDePago(metodo):
 def imprimirDescuentos():
     #Función que muestra los descuentos
     global descuentos
+    clear()
     for key in descuentos:
         print(f"{key}: {descuentos[key]*100}% descuento")
+    print()
 
 def clientConfig():
     #TODO: permite modificar los datos del cliente, y su metodo de pago
@@ -357,6 +369,7 @@ def GestionSalas():
 def IniciarSesion():
     global currentMenu,mainMenu
     user = None
+    clear()
     while user == None:
         user = input("Ingrese usuario: ")
         password = input("Ingrese contraseña: ")
@@ -384,6 +397,7 @@ def IniciarSesion():
 # totalFinal=aplicarDescuento(montoTotal,MetodosDePago)
 # print ("El precio final es: ", totalFinal)
 def volverMenuPrincipal():
+    clear()
     global currentMenu
     currentMenu = mainMenu
 
@@ -397,7 +411,8 @@ gestionPeliculas = {
     "1":consultarPeliculas,
     "2":cargarPelicula,
     "3":eliminarPelicula,
-    "4":volverMenuPrincipal
+    "4":editarPeliculas,
+    "5":volverMenuPrincipal
 }
 
 gestionUsuarios = {

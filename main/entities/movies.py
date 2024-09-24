@@ -1,5 +1,5 @@
 from numeration import getNumberFromSecuence
-from entities.utils import getById
+from entities.utils import getById, clear
 
 
 # [id,nombre,duracion,descripcion,genero,edad,fechaDeEstreno]
@@ -16,6 +16,7 @@ def getMovies():
 
 #Función para agregar películas al sistema
 def addMovie():
+    clear()
     global movies
     newMovie = []
     newMovie.append(getNumberFromSecuence("movieNumeration"))
@@ -25,15 +26,17 @@ def addMovie():
     newMovie.append(input("Ingrese género: "))
     newMovie.append(input("Ingrese edad: "))
     newMovie.append(input("Ingrese fecha de estreno (formato DD/MM/YYYY): "))
+    clear()
     print(newMovie)
     movies.append(newMovie)
-    print("Nueva pelicula agregada\t")
+    print("\nNueva pelicula agregada\n")
 
 
 #Función para editar películas. Como parametro el pasamos el id de la película Puede editar mas de un campo a la vez y
 #finalizar la edicion cuando el usuario lo desee
-def editMovie(movieId):
+def editMovie():
     global movies
+    movieId = int(input("ingrese id de pelicula a editar\n"))
     movieToEdit = None
     for movie in movies:
         if movie[0] == movieId:
@@ -41,46 +44,43 @@ def editMovie(movieId):
 
     if not movieToEdit:
         print("No se encontró ninguna película con ID:", movieId)
+        clear()
     else:
+        clear()
         bandera = True
         while bandera:
-            print("Editando la película:", movieToEdit)
-            print("Seleccione el campo que desea editar:")
+            print("Editando la película:", movieToEdit ,"\n")
+            print("Seleccione el campo que desea editar:\n")
             print("1. Nombre de la película")
             print("2. Duración")
             print("3. Descripción")
             print("4. Género")
             print("5. Edad recomendada")
             print("6. Fecha de estreno")
-            print("7. Terminar de editar")
+            print("7. Terminar de editar\n")
 
             choice = int(input())  # Esta línea debe estar dentro del bucle
-
+            print()
             if choice == 1:
-                print("Ingrese el nuevo nombre de la película:")
-                movieToEdit[1] = input()
+                movieToEdit[1] = input("Ingrese el nuevo nombre de la película:")
             elif choice == 2:
-                print("Ingrese la nueva duración:")
-                movieToEdit[2] = int(input())
+                movieToEdit[2] = int(input("Ingrese la nueva duración:"))
             elif choice == 3:
-                print("Ingrese la nueva descripción:")
-                movieToEdit[3] = input()
+                movieToEdit[3] = input("Ingrese la nueva descripción:")
             elif choice == 4:
-                print("Ingrese el nuevo género:")
-                movieToEdit[4] = input()
+                movieToEdit[4] = input("Ingrese el nuevo género:")
             elif choice == 5:
-                print("Ingrese la nueva edad recomendada:")
-                movieToEdit[5] = input()
+                movieToEdit[5] = input("Ingrese la nueva edad recomendada:")
             elif choice == 6:
-                print("Ingrese la nueva fecha de estreno (formato YYYYMMDD):")
-                movieToEdit[6] = input()
+                movieToEdit[6] = input("Ingrese la nueva fecha de estreno (formato YYYYMMDD):")
             elif choice == 7:
                 bandera = False
                 print("Edición finalizada")
             else:
                 print("Opción no válida.")
 
-            print("Película con ID", movieId, "ha sido actualizada.")
+            clear()
+            print("\nPelícula con ID", movieId, "ha sido actualizada.\n")
             print("Resultado:", movieToEdit)
 
     return movies
@@ -92,8 +92,10 @@ def deleteMovie(peliculaId, peliculas):
     movieToDelete = getById(peliculaId, peliculas)
     
     if movieToDelete == -1:
+        clear()
         print("No se encontró ninguna película con ID: ", peliculaId)
     else:
+        clear()
         peliculas.remove(movieToDelete)
         print("\nPelícula con ID ",peliculaId, " ha sido eliminada.\n")
 
