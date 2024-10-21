@@ -57,6 +57,9 @@ METODOS_DE_PAGO = {
     5: "Points"
 }
 
+#Crear una matriz funcion butacas para reservar butacas
+
+
 #-----------------------------------------------------------------------------------------------------------------------------------------
 
 def getValorEntrada():

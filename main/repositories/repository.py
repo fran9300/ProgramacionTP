@@ -41,15 +41,14 @@ def savePaymentMethods(payment_methods):
     with open('payment_methods.json', 'w') as file:
         json.dump(payment_methods, file, indent=4)
 
-#PAra cargar cosas:
+#Para cargar cosas:
 
 users = loadUsers()
 new_user = {"id": 3, "name": "Agustina", "email": "agustina@hotmail.com"}
 users.append(new_user)  # Agregas el nuevo usuario a la lista
 saveUsers(users)  # Guardas la lista actualizada
 
-#y asi con todos. Podes pasarle como parametro las cosas que queres cambiar con in 
-#Ej con usuario
+#Lo ideal es despues pasarlo a inputs. Que el adminitrador elija que editar y agregar
 
 
 def logicDelete():
