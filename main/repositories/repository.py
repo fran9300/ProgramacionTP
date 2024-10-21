@@ -1,14 +1,55 @@
+import json
+
+#Los hice separados pero capaz podemos juntar las funciones para crear el archivo y editarlo
+
 def loadUsers():
-    return None
+    with open('users.json', 'r') as file:
+        users = json.load(file)
+    return users
 
 def loadMovies():
-    return None
+    with open('movies.json', 'r') as file:
+        movies = json.load(file)
+    return movies
 
 def loadRooms():
-    return None
+    with open('rooms.json', 'r') as file:
+        rooms = json.load(file)
+    return rooms
 
 def loadPaymentMethods():
-    return None
+    with open('payment_methods.json', 'r') as file:
+        payment_methods = json.load(file)
+    return payment_methods
+
+#Para editarlos (Administrador)
+
+def saveUsers(users):
+    with open('users.json', 'w') as file:
+        json.dump(users, file, indent=4)
+
+
+def saveMovies(movies):
+    with open('movies.json', 'w') as file:
+        json.dump(movies, file, indent=4)
+
+def saveRooms(rooms):
+    with open('rooms.json', 'w') as file:
+        json.dump(rooms, file, indent=4)
+
+def savePaymentMethods(payment_methods):
+    with open('payment_methods.json', 'w') as file:
+        json.dump(payment_methods, file, indent=4)
+
+#PAra cargar cosas:
+
+users = loadUsers()
+new_user = {"id": 3, "name": "Agustina", "email": "agustina@hotmail.com"}
+users.append(new_user)  # Agregas el nuevo usuario a la lista
+saveUsers(users)  # Guardas la lista actualizada
+
+#y asi con todos. Podes pasarle como parametro las cosas que queres cambiar con in 
+#Ej con usuario
 
 
 def logicDelete():
@@ -21,6 +62,9 @@ def createTransaction():
 
 def autoInsertId(entidad):
     #@aMieres: se debe crear una funcion que cuando le llegue una entidad, busque la secuencia y obtenga su valor, se lo asigne a la entidad y devuelva la entidad
+    #seria hacer lo de numeration pero con archivos (o sea, lo de secuence ponerlo en archivo)
+
+
     
     return entidad
 
